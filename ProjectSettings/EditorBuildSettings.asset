@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 22f11d0e9fbb8364a89986ec4b920dd8
+  - enabled: 1
+    path: Assets/Scenes/CleanRoom.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Forest.unity
+    guid: 5efc5db3fe8da164ca9952a9c31e9f28
+  - enabled: 1
+    path: Assets/Scenes/Desert.unity
+    guid: adff480e67a1111409dc6f7d6e095336
+  - enabled: 1
+    path: Assets/Scenes/Water.unity
+    guid: 33e2749c2c284d046b6c1fdf56a9cf41
+  - enabled: 1
+    path: Assets/Scenes/Lava.unity
+    guid: 10983a8ebd967844b879bd41863c6991
+  - enabled: 1
+    path: Assets/Scenes/FinalBoss.unity
+    guid: 5012e6c2967721040ba60eaf9d68fd30
+  m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
