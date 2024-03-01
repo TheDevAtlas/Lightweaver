@@ -12,7 +12,7 @@ public class Lightbeam : MonoBehaviour
     public float shootSpeed;
     public float beamLength;
 
-    private Vector3 velocity;
+    public Vector3 velocity;
     private Vector3 startPoint;
     private float timeSinceShot;
 
@@ -28,11 +28,11 @@ public class Lightbeam : MonoBehaviour
         // Initialize the line renderer points
         lineRenderer.positionCount = subdivisions + 1;
 
-        lineRenderer.startWidth = 0.05f;
-        lineRenderer.endWidth = 0.05f;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
 
         startPoint = transform.position;
-        velocity = transform.forward * shootSpeed;
+        //velocity = transform.forward * shootSpeed;
         timeSinceShot = 0f;
     }
 
@@ -53,8 +53,9 @@ public class Lightbeam : MonoBehaviour
             }
         }
 
-
         UpdateLinePositions();
+
+        CheckCollider();
     }
 
     public void UpdateLinePositions()
@@ -74,80 +75,55 @@ public class Lightbeam : MonoBehaviour
             foreach (BlackHole blackHole in blackHoles)
             {
                 float distance = Vector3.Distance(simulatedPosition, blackHole.transform.position);
-                if (distance < blackHole.radius) // assuming blackHole.radius is a significant distance for gravity effect
+                if (distance < blackHole.radius)
                 {
                     Vector3 directionToBlackHole = (blackHole.transform.position - simulatedPosition).normalized;
-                    // Adjust the velocity based on the black hole's gravity
-                    // Note: This simplistic approach assumes the effect is instantaneous and linear, which might not be physically accurate but should work for a game.
                     simulatedVelocity += directionToBlackHole * blackHole.gravity * (segmentLength / shootSpeed);
                 }
             }
 
-            // Update the simulated position for the next segment
             simulatedPosition += simulatedVelocity.normalized * segmentLength;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void CheckCollider()
     {
-        print("hit");
+        Vector3 direction = velocity.normalized;
 
-        // If Beam Hits Target //
-        if(other.gameObject.tag == "Target")
+        RaycastHit hit;
+        if (Physics.Raycast(startPoint, direction, out hit, beamLength))
         {
-            // Set Target To True //
+            if (hit.collider.gameObject.tag == "Target")
+            {
+                Destroy(gameObject);
+            }
+            else if (hit.collider.gameObject.tag == "BlackHole")
+            {
+                Destroy(gameObject);
+            }
+            else if (hit.collider.gameObject.tag == "Prism")
+            {
+                hit.collider.gameObject.GetComponent<Prism>().SpawnNewBeams(velocity, blackHoles);
+                Destroy(gameObject);
+            }
+            else if (hit.collider.gameObject.tag == "Mirror")
+            {
+                // Calculate reflection direction
+                Vector3 incomingDirection = velocity.normalized;
+                Vector3 reflectDirection = Vector3.Reflect(incomingDirection, hit.normal);
 
-            // Instantiate Effect //
+                // Update velocity to the new direction
+                velocity = reflectDirection.normalized * shootSpeed;
 
-            // Create Sound //
-
-            // Destroy Lightbeam //
-            Destroy(gameObject);
-        }
-
-        if(other.gameObject.tag == "BlackHole")
-        {
-            // Intantiate Effect //
-
-            // Create Sound //
-
-            // Destroy Lightbeam //
-            Destroy(gameObject);
-        }
-
-        if(other.gameObject.tag == "Prism")
-        {
-            print("YESSSSS");
-            // Trigger Split Of Light //
-            other.gameObject.GetComponent<Prism>().SpawnNewBeams(velocity);
-            // Intantiate Effect //
-
-            // Create Sound //
-
-            // Destroy Lightbeam //
-            Destroy(gameObject);
-        }
-
-        if(other.gameObject.tag == "Mirror")
-        {
-            // Trigger Bounce Of Light //
-
-            // Instantiate Effect //
-
-            // Create Sound //
-
-            // Destroy Lightbeam //
-            Destroy(gameObject);
-        }
-
-        if(other.gameObject.tag == "Wall")
-        {
-            // Instantiate Effect //
-
-            // Create Sound //
-
-            // Destroy Lightbeam //
-            Destroy(gameObject);
+                // Since we're reflecting the beam, we should also update its start point to the hit point to avoid immediate recollision
+                //startPoint = hit.point;
+                UpdateLinePositions();
+            }
+            else if (hit.collider.gameObject.tag == "Wall")
+            {
+                Destroy(gameObject);
+            }
         }
     }
+
 }
