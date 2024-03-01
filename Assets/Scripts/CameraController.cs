@@ -18,33 +18,34 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        // Get Input //
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        // If Right Click, Move Camera //
-        // If Not, Snap To 45 Degrees  //
-        if(Input.GetMouseButton(1))
+        // If Right Mouse Button, Rotate Camera //
+        if (Input.GetMouseButton(1))
         {
             targetAngle += mouseX * mouseSensitivity;
         }
+        // If No Right Button, Snap Target Rotation //
         else
         {
             targetAngle = Mathf.Round(targetAngle / 45);
             targetAngle *= 45;
         }
 
-        // Keep Angle Within 0 - 360 ///
-        if(targetAngle < 0)
+        // Keep Angles Within 0-360 //
+        if (targetAngle < 0)
         {
             targetAngle += 360;
         }
-        if(targetAngle > 360)
+        if (targetAngle > 360)
         {
             targetAngle -= 360;
         }
 
-        // Set Angle Of Camera Pivot //
+        // Set The Angles //
         currentAngle = Mathf.LerpAngle(transform.eulerAngles.y, targetAngle, rotationSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(30, currentAngle, 0);
+        transform.rotation = Quaternion.Euler(35, currentAngle, 0);
     }
 }
