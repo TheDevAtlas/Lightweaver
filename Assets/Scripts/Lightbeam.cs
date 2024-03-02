@@ -18,6 +18,11 @@ public class Lightbeam : MonoBehaviour
 
     public List<BlackHole> blackHoles;
 
+    public float totalLife;
+    public float lifeLeft;
+    public float maxSize;
+
+
     void Start()
     {
         if (lineRenderer == null)
@@ -34,6 +39,8 @@ public class Lightbeam : MonoBehaviour
         startPoint = transform.position;
         //velocity = transform.forward * shootSpeed;
         timeSinceShot = 0f;
+
+        lifeLeft = totalLife;
     }
 
     private void Update()
@@ -56,6 +63,18 @@ public class Lightbeam : MonoBehaviour
         UpdateLinePositions();
 
         CheckCollider();
+
+        lifeLeft -= Time.deltaTime;
+
+        float size = Mathf.Lerp(0f, maxSize, lifeLeft / totalLife);
+
+        lineRenderer.startWidth = size;
+        lineRenderer.endWidth = size;
+
+        if(lifeLeft < 0f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void UpdateLinePositions()

@@ -45,7 +45,7 @@ public class Prism : MonoBehaviour
         newBeam.lineRenderer.startColor = c;
         newBeam.lineRenderer.endColor = c;
         newBeam.lineRenderer.material.color = c;
-        newBeam.lineRenderer.material.SetColor("_EmissionColor", c * 2f);
+        newBeam.lineRenderer.material.SetColor("_EmissionColor", c * 3f);
 
         newBeam.blackHoles = holes;
     }

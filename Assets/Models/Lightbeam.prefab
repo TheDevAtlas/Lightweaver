@@ -49,7 +49,11 @@ MonoBehaviour:
   subdivisions: 100
   shootSpeed: 0
   beamLength: 0
+  velocity: {x: 0, y: 0, z: 0}
   blackHoles: []
+  totalLife: 5
+  lifeLeft: 0
+  maxSize: 0.1
 --- !u!120 &-4887295440164940583
 LineRenderer:
   serializedVersion: 2
