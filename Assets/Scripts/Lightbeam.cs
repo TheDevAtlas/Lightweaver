@@ -114,6 +114,8 @@ public class Lightbeam : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Target")
             {
+                hit.collider.gameObject.GetComponent<MeshRenderer>().materials[1].color = lineRenderer.startColor;
+                hit.collider.gameObject.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", lineRenderer.startColor * 3f);
                 Destroy(gameObject);
             }
             else if (hit.collider.gameObject.tag == "BlackHole")

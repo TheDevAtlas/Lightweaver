@@ -16,6 +16,17 @@ public class CameraController : MonoBehaviour
     public float mouseSensitivity = 2f;
     public float rotationSpeed = 5f;
 
+    public Transform target;
+
+    public float smoothSpeed = 0.125f;
+
+    void FixedUpdate()
+    {
+        Vector3 desiredPosition = target.position;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPosition;
+    }
+
     private void Update()
     {
         // Get Input //

@@ -19,15 +19,15 @@ public class Prism : MonoBehaviour
     // Spawn 3 New Beams Based On Input Velocity //
     public void SpawnNewBeams(Vector3 inputVelocity, List<BlackHole> holes)
     {
-
+        //inputVelocity = transform.forward;
         // One beam x degrees to the left //
-        CreateBeam(inputVelocity, leftBeam, -15f, holes);
+        CreateBeam(inputVelocity, leftBeam, -degrees, holes);
 
         // One beam 0 degrees //
         CreateBeam(inputVelocity, middleBeam, 0f, holes);
 
         // One beam x degrees to the right //
-        CreateBeam(inputVelocity, rightBeam, 15f, holes);
+        CreateBeam(inputVelocity, rightBeam, degrees, holes);
     }
 
     void CreateBeam(Vector3 velocity, Color c, float angle, List<BlackHole> holes)
