@@ -136,6 +136,7 @@ public class Lightbeam : MonoBehaviour
                 // Update velocity to the new direction
                 velocity = reflectDirection.normalized * shootSpeed;
 
+
                 // Since we're reflecting the beam, we should also update its start point to the hit point to avoid immediate recollision
                 //startPoint = hit.point;
                 UpdateLinePositions();
