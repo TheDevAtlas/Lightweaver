@@ -6,10 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Mountain.unity
-    guid: 9dac9cf048cfcfb4da9e309e1f59d51f
+    path: Assets/Scenes/MainMenu.unity
+    guid: 617daa68755f0094ab13a817e94ff9ba
   - enabled: 1
-    path: Assets/Scenes/CleanRoom.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/TutorialLevel.unity
+    guid: 2d930d15e525cdb48b82e138665c4147
+  - enabled: 1
+    path: Assets/Scenes/MountainLevel.unity
+    guid: 941f5609af0ab8c42b56677ac64395b6
+  - enabled: 1
+    path: Assets/Scenes/LavaLevel.unity
+    guid: 8f12c4b871ea31146a61a40bc82f673e
+  - enabled: 1
+    path: Assets/Scenes/ParticleLevel.unity
+    guid: 7042d2018a3827a4abcdeae2c817aeb4
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: d18e46c7724f4c24181fa5f5cac057f1
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

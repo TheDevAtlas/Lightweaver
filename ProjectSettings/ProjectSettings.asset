@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 27
-  productGUID: badc6ab013c199d42a2b8491398fc3b7
+  productGUID: d41c9c8962de08c4baef752618c4186b
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: TheDevAtlas
-  productName: AcerolaGameJam
+  companyName: DefaultCompany
+  productName: Lightweaver - TheDevAtlas
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -159,7 +159,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Standalone: com.TheDevAtlas.AcerolaGameJam
+    Standalone: com.DefaultCompany.Lightweaver---TheDevAtlas
   buildNumber:
     Bratwurst: 0
     Standalone: 0
@@ -686,16 +686,16 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: AcerolaGameJam
+  metroPackageName: Lightweaver-TheDevAtlas
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: AcerolaGameJam
+  metroApplicationDescription: Lightweaver - TheDevAtlas
   wsaImages: {}
-  metroTileShortName: AcerolaGameJam
+  metroTileShortName: Lightweaver - TheDevAtlas
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -762,12 +762,12 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: db762172-7db3-479e-bce6-951db53d2146
+  cloudProjectId: 63a5bb25-fb63-4476-a981-f3b9f25e7983
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: AcerolaGameJam
+  projectName: Lightweaver - TheDevAtlas
   organizationId: blue-pixel-studios
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

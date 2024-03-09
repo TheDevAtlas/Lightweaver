@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -12,17 +13,26 @@ public class ShootController : MonoBehaviour
 
     public List<BlackHole> blackHoles;
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetMouseButtonDown(0))
+        GameObject[] holes = GameObject.FindGameObjectsWithTag("BlackHole");
+
+        foreach(var g in holes)
         {
-            Lightbeam newBeam = Instantiate(lightBeamAsset, transform.position, transform.rotation);
-
-            newBeam.shootSpeed = this.shootSpeed;
-            newBeam.beamLength = 1f;
-
-            newBeam.blackHoles = blackHoles;
-            newBeam.velocity = newBeam.transform.forward * shootSpeed;
+            blackHoles.Add(g.GetComponent<BlackHole>());
         }
+    }
+
+    public void Shoot()
+    {
+        Lightbeam newBeam = Instantiate(lightBeamAsset, transform.position, transform.rotation);
+
+        newBeam.shootSpeed = this.shootSpeed;
+        newBeam.beamLength = 1f;
+
+        newBeam.blackHoles = blackHoles;
+        newBeam.velocity = newBeam.transform.forward * shootSpeed;
+
+        newBeam.colorID = 0;
     }
 }

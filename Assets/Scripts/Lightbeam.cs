@@ -22,6 +22,11 @@ public class Lightbeam : MonoBehaviour
     public float lifeLeft;
     public float maxSize;
 
+    public int colorID;
+
+    public GameObject explosionEffect;
+    public GameObject reflectEffect;
+    public CameraShake camshake;
 
     void Start()
     {
@@ -30,8 +35,16 @@ public class Lightbeam : MonoBehaviour
             lineRenderer = GetComponent<LineRenderer>();
         }
 
+        camshake = Camera.main.GetComponent<CameraShake>();
+
         // Initialize the line renderer points
         lineRenderer.positionCount = subdivisions + 1;
+
+        for(int i = 0; i < subdivisions+1; i++)
+        {
+            lineRenderer.SetPosition(i, new Vector3(0, -5, 0));
+        }
+        
 
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
@@ -87,7 +100,7 @@ public class Lightbeam : MonoBehaviour
 
         for (int i = 0; i <= subdivisions; i++)
         {
-            simulatedPosition.y = 0.75f;
+            simulatedPosition.y = -0.25f;
             lineRenderer.SetPosition(i, simulatedPosition);
 
             // Simulate the effect of black holes on this segment
@@ -114,9 +127,12 @@ public class Lightbeam : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Target")
             {
-                hit.collider.gameObject.GetComponent<MeshRenderer>().materials[1].color = lineRenderer.startColor;
-                hit.collider.gameObject.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", lineRenderer.startColor * 3f);
+                /*hit.collider.gameObject.GetComponent<MeshRenderer>().materials[1].color = lineRenderer.startColor;
+                hit.collider.gameObject.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", lineRenderer.startColor * 3f);*/
+                hit.collider.gameObject.GetComponent<Target>().ChangeColor(colorID);
                 Destroy(gameObject);
+                Instantiate(explosionEffect, hit.point, Quaternion.identity);
+                camshake.StartShake();
             }
             else if (hit.collider.gameObject.tag == "BlackHole")
             {
@@ -126,6 +142,7 @@ public class Lightbeam : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Prism>().SpawnNewBeams(velocity, blackHoles);
                 Destroy(gameObject);
+                Instantiate(reflectEffect, hit.point, Quaternion.identity);
             }
             else if (hit.collider.gameObject.tag == "Mirror")
             {
@@ -136,16 +153,25 @@ public class Lightbeam : MonoBehaviour
                 // Update velocity to the new direction
                 velocity = reflectDirection.normalized * shootSpeed;
 
+                startPoint = hit.collider.gameObject.transform.position;
 
                 // Since we're reflecting the beam, we should also update its start point to the hit point to avoid immediate recollision
                 //startPoint = hit.point;
                 UpdateLinePositions();
+                Instantiate(reflectEffect, hit.point, Quaternion.identity);
             }
             else if (hit.collider.gameObject.tag == "Wall")
             {
                 Destroy(gameObject);
+                Instantiate(explosionEffect, hit.point, Quaternion.identity);
+                camshake.StartShake();
+            }
+            else if(hit.collider.gameObject.tag == "Accel")
+            {
+                Destroy(gameObject);
+                Instantiate(reflectEffect, hit.point, Quaternion.identity);
+                hit.collider.gameObject.GetComponent<AccelController>().AddToAccel();
             }
         }
     }
-
 }

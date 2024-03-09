@@ -21,18 +21,18 @@ public class Prism : MonoBehaviour
     {
         //inputVelocity = transform.forward;
         // One beam x degrees to the left //
-        CreateBeam(inputVelocity, leftBeam, -degrees, holes);
+        CreateBeam(inputVelocity, leftBeam, -degrees, holes, 1);
 
         // One beam 0 degrees //
-        CreateBeam(inputVelocity, middleBeam, 0f, holes);
+        CreateBeam(inputVelocity, middleBeam, 0f, holes, 2);
 
         // One beam x degrees to the right //
-        CreateBeam(inputVelocity, rightBeam, degrees, holes);
+        CreateBeam(inputVelocity, rightBeam, degrees, holes, 3);
     }
 
-    void CreateBeam(Vector3 velocity, Color c, float angle, List<BlackHole> holes)
+    void CreateBeam(Vector3 velocity, Color c, float angle, List<BlackHole> holes, int colorID)
     {
-        Quaternion rotation = Quaternion.LookRotation(velocity);
+        Quaternion rotation = Quaternion.LookRotation(-transform.right);
         rotation *= Quaternion.Euler(new Vector3(0, angle, 0));
         // Instantiate Lightbeam at the position and rotation of this controller
         Lightbeam newBeam = Instantiate(lightBeamAsset, transform.position, rotation);
@@ -48,5 +48,7 @@ public class Prism : MonoBehaviour
         newBeam.lineRenderer.material.SetColor("_EmissionColor", c * 3f);
 
         newBeam.blackHoles = holes;
+
+        newBeam.colorID = colorID;
     }
 }
