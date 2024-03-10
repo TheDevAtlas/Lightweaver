@@ -10950,6 +10950,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraPivot
       objectReference: {fileID: 0}
+    - target: {fileID: 6258294805914422024, guid: 8a35d266f541fbd4eb5d4cbf3ed11fae, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
